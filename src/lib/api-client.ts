@@ -13,6 +13,14 @@ class ApiClient {
   ): Promise<T> {
     const token = getTokenFromStorage();
 
+    // Debug logging
+    console.log("API Request Debug:", {
+      endpoint,
+      hasToken: !!token,
+      tokenPreview: token ? `${token.substring(0, 20)}...` : "No token",
+      baseURL: this.baseURL,
+    });
+
     const config: RequestInit = {
       ...options,
       headers: {
@@ -22,9 +30,18 @@ class ApiClient {
       },
     };
 
+    console.log("Request headers:", config.headers);
+
     const response = await fetch(`${this.baseURL}${endpoint}`, config);
 
     if (!response.ok) {
+      // Handle token expiration (401 Unauthorized)
+      if (response.status === 401 && token) {
+        console.warn("Token expired or invalid, removing from storage");
+        // You could add a token refresh logic here or redirect to login
+        // For now, just log the issue
+      }
+
       const errorData = await response
         .json()
         .catch(() => ({ message: "Request failed" }));

@@ -40,6 +40,16 @@ interface UserResponse {
   errors: null;
 }
 
+interface NextAuthCallbackResponse {
+  success: boolean;
+  message: string;
+  data: {
+    user: User;
+    token: TokenData;
+  };
+  errors: null;
+}
+
 interface ForgotPasswordRequest {
   email: string;
 }

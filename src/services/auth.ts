@@ -56,7 +56,7 @@ export const nextAuthCallback = async (
   provider: string = "github",
   provider_id?: string,
   username?: string
-): Promise<UserResponse> => {
+): Promise<NextAuthCallbackResponse> => {
   // Build query parameters
   const params = new URLSearchParams();
   params.append("email", email);
@@ -66,7 +66,7 @@ export const nextAuthCallback = async (
   if (provider_id) params.append("provider_id", provider_id);
   if (username) params.append("username", username);
 
-  return apiClient.post<UserResponse>(
+  return apiClient.post<NextAuthCallbackResponse>(
     `/auth/nextauth-callback?${params.toString()}`
   );
 };
