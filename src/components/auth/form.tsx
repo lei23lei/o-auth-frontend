@@ -17,6 +17,7 @@ import { login, saveTokenToStorage } from "@/services/auth";
 import Link from "next/link";
 import { formSchema, validatePasswordMatch } from "@/lib/validations";
 import * as z from "zod";
+import { AuthSigninButton } from "./auth-signin-button";
 
 interface FormProps {
   isRegistered?: boolean;
@@ -250,6 +251,7 @@ export const Form = ({ isRegistered = false }: FormProps) => {
               ? "Signing In..."
               : "Sign In"}
           </Button>
+          <AuthSigninButton />
         </form>
       </CardContent>
     </Card>

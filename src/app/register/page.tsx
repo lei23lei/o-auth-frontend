@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { Form } from "@/components/form";
+import { Form } from "@/components/auth/form";
 import { getCurrentUser, getTokenFromStorage } from "@/services/auth";
 import Link from "next/link";
 
