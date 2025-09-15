@@ -18,6 +18,7 @@ import Link from "next/link";
 import { formSchema, validatePasswordMatch } from "@/lib/validations";
 import * as z from "zod";
 import { AuthSigninButton } from "./auth-signin-button";
+import { signOutAction } from "@/actions/auth";
 
 interface FormProps {
   isRegistered?: boolean;
@@ -251,7 +252,16 @@ export const Form = ({ isRegistered = false }: FormProps) => {
               ? "Signing In..."
               : "Sign In"}
           </Button>
-          <AuthSigninButton />
+          <div className="flex flex-col gap-2 mt-4">
+            <AuthSigninButton />
+            <Button
+              variant="outline"
+              onClick={() => signOutAction()}
+              className="w-full"
+            >
+              Sign Out
+            </Button>
+          </div>
         </form>
       </CardContent>
     </Card>

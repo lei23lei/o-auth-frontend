@@ -47,3 +47,26 @@ export const resetPassword = async (
     new_password: password,
   });
 };
+
+// NextAuth callback - create/update OAuth user in backend
+export const nextAuthCallback = async (
+  email: string,
+  name?: string,
+  image?: string,
+  provider: string = "github",
+  provider_id?: string,
+  username?: string
+): Promise<UserResponse> => {
+  // Build query parameters
+  const params = new URLSearchParams();
+  params.append("email", email);
+  if (name) params.append("name", name);
+  if (image) params.append("image", image);
+  params.append("provider", provider);
+  if (provider_id) params.append("provider_id", provider_id);
+  if (username) params.append("username", username);
+
+  return apiClient.post<UserResponse>(
+    `/auth/nextauth-callback?${params.toString()}`
+  );
+};
