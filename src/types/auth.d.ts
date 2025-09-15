@@ -11,19 +11,24 @@ interface TokenData {
   email: string;
 }
 
-interface LoginResponse {
+interface TokenResponse {
   success: boolean;
   message: string;
   data: TokenData;
   errors: null;
 }
 
+interface LoginResponse extends TokenResponse {}
+
 interface User {
   id: string;
   email: string;
-  password: string;
+  password?: string; // Optional for OAuth users
   image?: string;
   name?: string;
+  provider: string; // Default to "email", can be "google", "github", etc.
+  provider_id?: string; // GitHub user ID or other OAuth provider ID
+  username?: string; // GitHub username or other provider username
   created_at: string;
   updated_at: string;
 }
